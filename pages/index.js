@@ -1,4 +1,4 @@
-import { PocLanding } from "./poc-ai";
+import PocLanding from "./poc-ai";
 
 export default function Home() {
   return <PocLanding />;
