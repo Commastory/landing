@@ -1,0 +1,38 @@
+
+version: 1
+
+resources:
+  - name: ollama-api
+    type: deployment
+    image: ollama/ollama
+    ports:
+      - containerPort: 11434
+    env:
+      - name: MODEL
+        value: llama2
+    gpu: true
+    replicas: 1
+
+  - name: vector-db
+    type: deployment
+    image: qdrant/qdrant
+    ports:
+      - containerPort: 6333
+    replicas: 1
+
+  - name: ui
+    type: deployment
+    image: streamlit/streamlit
+    source: ./app
+    ports:
+      - containerPort: 8501
+    env:
+      - name: VECTOR_DB_URL
+        value: http://vector-db:6333
+      - name: LLM_URL
+        value: http://ollama-api:11434
+    replicas: 1
+
+  - name: autoscaler
+    type: raw-k8s
+    source: ./k8s-autoscaler/hpa.yaml
