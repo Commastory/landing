@@ -1,1 +1,5 @@
-// Placeholder for React component content from editor
+export default function PocLanding() {
+  return (
+    <div>...</div>
+  )
+}
