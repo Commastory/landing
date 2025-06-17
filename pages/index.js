@@ -1,5 +1,7 @@
-import PocLanding from "./poc-ai";
-
 export default function Home() {
-  return <PocLanding />;
+  return (
+    <div style={{ padding: "2rem", fontSize: "1.5rem" }}>
+      ✅ Emma PoC Landing is working!
+    </div>
+  );
 }
